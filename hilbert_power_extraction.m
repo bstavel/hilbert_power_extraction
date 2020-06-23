@@ -3,6 +3,13 @@
 %%% preprocessed data is pulled from: deborahm/DataWorkspace/_projects/Dictator/Preprocessing/
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% Add fieltrip to the path %%
+if ~exist('ft_defaults.m', 'file')
+    addpath('../fieldtrip/');
+    ft_defaults;
+end
+
+
 %% load data %%
 data_fname = '/home/knight/deborahm/DataWorkspace/_projects/Dictator/Preprocessing/IR19/Around_choice/data_final_choice_padding.mat';
 load(data_fname);
