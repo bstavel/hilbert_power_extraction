@@ -9,28 +9,33 @@ if ~exist('ft_defaults.m', 'file')
     ft_defaults;
 end
 
-
 %% load data %%
-data_fname = '/home/knight/deborahm/DataWorkspace/_projects/Dictator/Preprocessing/IR19/Around_choice/data_final_choice_padding.mat';
+data_fname = './data/data_final_padding.mat';
 load(data_fname);
 
 %% set subband, trial, and time info %%
 nTrials = size(data.trialinfo, 1); % how many trials
 nTime = size(data.trial{1}, 2); % how many miliseconds of data per trial
+nElecs = size(data.label, 1);
 subbands = [70 90; 80 100; 90 110; 100 120; 110 130; 120 140; 130 150]; % subband frequenices
 nSubbands = size(subbands, 1);
-dataSave = zeros(nSubbands, nTrials, nTime);
+dataSave = zeros(nSubbands, nElecs, nTime, nTrials);
 
 %% loop over subbands and extract the power information %%
 for idxSubband = 1:nSubbands
-    fprintf('Processing subband #%i/%i...\n', idxSubband, nSubbands);
+  fprintf('Processing subband #%i/%i...\n', idxSubband, nSubbands);
 
-    % bandpass filter
+  % bandpass filter
     cfg = [];
     cfg.bpfilter = 'yes';
     cfg.bpfreq = [subbands(idxSubband, 1) subbands(idxSubband, 2)];
-%     cfg.bpfiltord = sbParams(3);
-    dataTMP = ft_preprocessing(cfg, data2);
+  % cfg.bpfiltord = sbParams(3);
+  % remove first two trials %
+    flags = ones([1,nTrials]);
+    flags(1) = 0;
+    flags(2) = 0;
+    cfg.trials=(flags==1);
+    dataTMP = ft_preprocessing(cfg, data);
 
     % Hilbert transform
     cfg = [];
@@ -38,17 +43,17 @@ for idxSubband = 1:nSubbands
     dataTMP = ft_preprocessing(cfg, dataTMP);
 
     % save subband data
-    dataSave(idxSubband, :, :) = cat(1, dataTMP.trial{:});
+    dataSave(idxSubband, :, :, find(flags==1)) = cat(3, dataTMP.trial{:});
 end
 
 % normalize subbands before averaging
-for idxTrial = 1:210
+for idxTrial = 1:nTrials
     % grab time index
     pre_trial_time = -.2
     post_trial_time = 2
-    indices_of_interest = find(dataTMP.time{idx} < post_trial_time & dataTMP.time{idx} > pre_trial_time) ;
+    indices_of_interest = find(dataTMP.time{idxTrial} < post_trial_time & dataTMP.time{idxTrial} > pre_trial_time) ;
     % normalize subband
-    dataTMP.trial{idxTrial} = mean(robustScaler(squeeze(dataSave(:, idxTrial, indices_of_interest)), 2));
+    dataTMP.trial{idxTrial} = mean(robustScaler(squeeze(dataSave(:, :, indices_of_interest, idxTrial)), 2));
 end
 dataHilb = mean(cat(1, dataTMP.trial{:}));
 TOI2 = 10001:12001;
