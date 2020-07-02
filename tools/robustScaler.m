@@ -1,4 +1,4 @@
-function med = robustScaler(M_in, dim, quartiles)
+function M_out = robustScaler(M_in, dim, quartiles)
 
     if nargin < 3
         quartiles = [10 90];
@@ -14,4 +14,4 @@ function med = robustScaler(M_in, dim, quartiles)
         med = nanmedian(M_in(:));
         IQR = prctile(M_in(:), quartiles(2)) - prctile(M_in(:), quartiles(1));
     end
-  %  M_out = (M_in-med)./IQR;
+   M_out = (M_in-med)./IQR;
