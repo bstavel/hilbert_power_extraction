@@ -14,3 +14,4 @@ extracts power from preprocessed iEEG electrode time series data across the freq
 * Can I shrink the data down to our TOI before using robustScaler?
 * Do you do an additional zscore step by trial after robustScaler?
 * How do you reduce the time resolution of the hilber transform? At what step do you change it?
+* Suggestions for parrallelization?
