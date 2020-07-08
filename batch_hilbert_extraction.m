@@ -62,7 +62,7 @@ for subIdx = 1:length(subs)
   sub_config.delta_cfg.bpfilter = 'yes'; % do bandpass filter
   sub_config.delta_cfg.bpfreq = [1 4]; % frequency bounds
   sub_config.delta_cfg.bpfiltord = 3; % filter order
-  sub_config.delta_cfg.bpfreq = [1 4]; % subbands == bpfreq when f <30
+  sub_config.delta_cfg.subbands = [1 4]; % subbands == bpfreq when f <30
   sub_config.delta_cfg.hilbert = 'abs';
 
   %% theta %%
@@ -128,7 +128,7 @@ end
 
 %% extract power via hilbert transforms %%
 
- for pIdx = 0:((length(subs)*6) - 1)
+ parfor pIdx = 0:((length(subs)*6) - 1)
     %% get subject and frequency indices %%
     subject_config = floor(pIdx/6) + 1; % there are 6 freq bands, so every 6 switch to new sub
     freqIdx = mod(pIdx, 6) ; % the remainder is the freq we are on
