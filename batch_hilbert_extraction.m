@@ -32,8 +32,11 @@
 % srun --pty -A fc_knightlab -p savio_debug -t 00:01:00 bash -i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% set par pool workers %%
+parpool(12); % is default, but is also how many configs you have
 
-%% Add fieltrip to the path %%
+%% Add fieltrip and tools to the path %%
+addpath('tools');
 if ~exist('ft_defaults.m', 'file')
     addpath('../fieldtrip/');
     ft_defaults;
@@ -54,49 +57,67 @@ for subIdx = 1:length(subs)
   %% delta %%
   sub_config.delta_cfg = [];
   sub_config.delta_cfg.filename = sprintf('./data/%s_data_final_padding.mat', sub);
+  sub_config.delta_cfg.sub = sub;
+  sub_config.delta_cfg.freq = 'delta';
   sub_config.delta_cfg.bpfilter = 'yes'; % do bandpass filter
   sub_config.delta_cfg.bpfreq = [1 4]; % frequency bounds
   sub_config.delta_cfg.bpfiltord = 3; % filter order
+  sub_config.delta_cfg.bpfreq = [1 4]; % subbands == bpfreq when f <30
   sub_config.delta_cfg.hilbert = 'abs';
 
   %% theta %%
   theta_cfg = [];
   sub_config.theta_cfg.filename = sprintf('./data/%s_data_final_padding.mat', sub);
+  sub_config.theta_cfg.sub = sub;
+  sub_config.theta_cfg.freq = 'theta';
   sub_config.theta_cfg.bpfilter = 'yes'; % do bandpass filter
   sub_config.theta_cfg.bpfreq = [4 8]; % frequency bounds
   sub_config.theta_cfg.bpfiltord = 4; % filter order
+  sub_config.theta_cfg.subbands = [4 8]; % subbands == bpfreq when f <30
   sub_config.theta_cfg.hilbert = 'abs';
 
   %% alpha %%
   alpha_cfg = [];
   sub_config.alpha_cfg.filename = sprintf('./data/%s_data_final_padding.mat', sub);
+  sub_config.alpha_cfg.sub = sub;
+  sub_config.alpha_cfg.freq = 'alpha';
   sub_config.alpha_cfg.bpfilter = 'yes'; % do bandpass filter
   sub_config.alpha_cfg.bpfreq = [8 13]; % frequency bounds
   sub_config.alpha_cfg.bpfiltord = 4; % filter order
+  sub_config.alpha_cfg.subbands = [8 13]; % subbands == bpfreq when f <30
   sub_config.alpha_cfg.hilbert = 'abs';
 
   %% beta %%
   beta_cfg = [];
   sub_config.beta_cfg.filename = sprintf('./data/%s_data_final_padding.mat', sub);
+  sub_config.beta_cfg.sub = sub;
+  sub_config.beta_cfg.freq = 'beta';
   sub_config.beta_cfg.bpfilter = 'yes'; % do bandpass filter
   sub_config.beta_cfg.bpfreq = [13 30]; % frequency bounds
   sub_config.beta_cfg.bpfiltord = 4; % filter order
+  sub_config.beta_cfg.subbands = [13 30]; % subbands == bpfreq when f <30
   sub_config.beta_cfg.hilbert = 'abs';
 
   %% gamma %%
   gamma_cfg = [];
   sub_config.gamma_cfg.filename = sprintf('./data/%s_data_final_padding.mat', sub);
+  sub_config.gamma_cfg.sub = sub;
+  sub_config.gamma_cfg.freq = 'gamma';
   sub_config.gamma_cfg.bpfilter = 'yes'; % do bandpass filter
   sub_config.gamma_cfg.bpfreq = [30 70]; % frequency bounds
   sub_config.gamma_cfg.bpfiltord = 4; % filter order
+  sub_config.gamma_cfg.subbands = [30 40; 35 45; 40 50; 45 55; 50 60; 55 65; 60 70];
   sub_config.gamma_cfg.hilbert = 'abs';
 
   %% hfa %%
   hfa_cfg = [];
   sub_config.hfa_cfg.filename = sprintf('./data/%s_data_final_padding.mat', sub);
+  sub_config.hfa_cfg.sub = sub;
+  sub_config.hfa_cfg.freq = 'hfa';
   sub_config.hfa_cfg.bpfilter = 'yes'; % do bandpass filter
   sub_config.hfa_cfg.bpfreq = [70 150]; % frequency bounds
   sub_config.hfa_cfg.bpfiltord = 4; % filter order
+  sub_config.hfa_cfg.subbands = [70 90; 80 100; 90 110; 100 120; 110 130; 120 140; 130 150];
   sub_config.hfa_cfg.hilbert = 'abs';
 
   % store in all_configs %
@@ -107,23 +128,23 @@ end
 
 %% extract power via hilbert transforms %%
 
- parfor pIdx = 1:(length(subs)*6)
+ for pIdx = 0:((length(subs)*6) - 1)
     %% get subject and frequency indices %%
-    subject_config = floor(pIdx/7) + 1 ; % there are 6 freq bands, so every 6 switch to new sub
-    freqIdx = mod(pIdx, 7) ; % the remainder is the freq we are on
+    subject_config = floor(pIdx/6) + 1; % there are 6 freq bands, so every 6 switch to new sub
+    freqIdx = mod(pIdx, 6) ; % the remainder is the freq we are on
     % use freq index to frequency config name %
     switch freqIdx
-      case (1)
+      case (0)
           freq_config = 'delta_cfg';
-      case (2)
+      case (1)
           freq_config = 'theta_cfg';
-      case (3)
+      case (2)
           freq_config = 'alpha_cfg';
-      case (4)
+      case (3)
           freq_config = 'beta_cfg';
-      case (5)
+      case (4)
           freq_config = 'gamma_cfg';
-      case (6)
+      case (5)
           freq_config = 'hfa_cfg';
     end
     %% set config %%
