@@ -3,11 +3,11 @@
 #SBATCH --account=fc_knightlab
 #SBATCH --partition=savio
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=12
+#SBATCH --ntasks-per-node=6
 #SBATCH --cpus-per-task=1
 #SBATCH --time=03:00:00
-#SBATCH --output=hilbert_job_%j.out
-#SBATCH --error=hilbert_job_%j.err
+#SBATCH --output=./slurm/hilbert_job_%j.out
+#SBATCH --error=./slurm/hilbert_job_%j.err
 #SBATCH --mail-user=bstavel@berkeley.edu
 #SBATCH --mail-type=ALL
 #
