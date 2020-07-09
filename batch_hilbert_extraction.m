@@ -33,7 +33,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% set par pool workers %%
-parpool(6); % is default, but is also how many configs you have
+% parpool(6); % is default, but is also how many configs you have
 
 %% Add fieltrip and tools to the path %%
 addpath('tools');
@@ -43,8 +43,8 @@ if ~exist('ft_defaults.m', 'file')
 end
 
 %% get subject list %%
-subs = {'CP34-1', 'CP34-2'}
-
+% subs = {'CP34-1', 'CP34-2'}
+subs = {'CP34-1'}
 
 %%% create frequency band configs %%%
 all_configs = {};
@@ -128,25 +128,29 @@ end
 
 %% extract power via hilbert transforms %%
 
- parfor pIdx = 0:((length(subs)*6) - 1)
+ % parfor pIdx = 0:((length(subs)*6) - 1)
+ for
     %% get subject and frequency indices %%
     subject_config = floor(pIdx/6) + 1; % there are 6 freq bands, so every 6 switch to new sub
     freqIdx = mod(pIdx, 6) ; % the remainder is the freq we are on
     % use freq index to frequency config name %
-    switch freqIdx
-      case (0)
-          freq_config = 'delta_cfg';
-      case (1)
-          freq_config = 'theta_cfg';
-      case (2)
-          freq_config = 'alpha_cfg';
-      case (3)
-          freq_config = 'beta_cfg';
-      case (4)
-          freq_config = 'gamma_cfg';
-      case (5)
-          freq_config = 'hfa_cfg';
-    end
+    % switch freqIdx
+    %   case (0)
+    %       freq_config = 'delta_cfg';
+    %   case (1)
+    %       freq_config = 'theta_cfg';
+    %   case (2)
+    %       freq_config = 'alpha_cfg';
+    %   case (3)
+    %       freq_config = 'beta_cfg';
+    %   case (4)
+    %       freq_config = 'gamma_cfg';
+    %   case (5)
+    %       freq_config = 'hfa_cfg';
+    % end
+    %% profiling for debugging mem issues
+    freq_config = 'hfa_cfg';
+
     %% set config %%
     config = all_configs{subject_config}.(freq_config);
 
