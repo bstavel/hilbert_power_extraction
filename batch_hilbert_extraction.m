@@ -16,7 +16,7 @@
 % 30-70:{bandwidth: 20, step: 5, filter order: 4, bounded flag: 1}
 % 70-150:{bandwidth: 20, step: 5, filter order: 4, bounded flag: 1}
 
-%% this is the same info, but c&p directly from the script
+%% this is the same info, but c&p directly from Ludo's script
 % 1_4 - 3_3_3_1_1
 % 4_8 - 4_4_4_1_1
 % 8_13 - 5_5_4_1_1
@@ -33,7 +33,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% set par pool workers %%
-parpool(12); % is default, but is also how many configs you have
+parpool(6); % is default, but is also how many configs you have
 
 %% Add fieltrip and tools to the path %%
 addpath('tools');
