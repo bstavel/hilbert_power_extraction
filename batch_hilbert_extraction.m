@@ -129,7 +129,7 @@ end
 %% extract power via hilbert transforms %%
 
  % parfor pIdx = 0:((length(subs)*6) - 1)
- for
+ for pIdx = 0:((length(subs)*6) - 1)
     %% get subject and frequency indices %%
     subject_config = floor(pIdx/6) + 1; % there are 6 freq bands, so every 6 switch to new sub
     freqIdx = mod(pIdx, 6) ; % the remainder is the freq we are on
