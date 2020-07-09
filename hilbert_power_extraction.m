@@ -28,7 +28,7 @@ for idxSubband = 1:nSubbands
     cfg = [];
     cfg.bpfilter = config.bpfilter;
     cfg.bpfreq = [subbands(idxSubband, 1) subbands(idxSubband, 2)];
-    cfg.bpfiltord = config.bpfiltord; % what is this? why is it uncommented?
+    cfg.bpfiltord = config.bpfiltord;
     cfg.hilbert = config.hilbert;
     dataTMP = ft_preprocessing(cfg, data);
 
@@ -42,9 +42,11 @@ clear dataTMP
 % normalize subbands before averaging
 for idxTrial = 1:nTrials
     % normalize subband
-    data.trial{idxTrial} = squeeze(mean(robustScaler(squeeze(dataSave(:, :, :, idxTrial)), 3))); % is it okay to grab TOI before robust scaler
+    data.trial{idxTrial} = squeeze(mean(robustScaler(squeeze(dataSave(:, :, :, idxTrial)), 3)));
 end
 
+%% clear data to deal with memory issues
+clear dataSave
 
 % get electrode names %
 elec_table = cell2table(data.label);
