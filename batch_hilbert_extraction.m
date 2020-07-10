@@ -46,8 +46,7 @@ if ~exist('ft_defaults.m', 'file')
 end
 
 %% get subject list %%
-% subs = {'CP34-1', 'CP34-2'}
-subs = {'CP34-2'}
+subs = {'CP34-1', 'CP34-2'}
 
 %%% create frequency band configs %%%
 all_configs = {};
