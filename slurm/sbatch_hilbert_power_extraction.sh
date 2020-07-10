@@ -5,7 +5,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=2
-#SBATCH --time=03:00:00
+#SBATCH --time=00:30:00
 #SBATCH --output=./slurm/hilbert_job_%j.out
 #SBATCH --error=./slurm/hilbert_job_%j.err
 #SBATCH --mail-user=bstavel@berkeley.edu

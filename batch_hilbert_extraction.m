@@ -36,7 +36,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% set par pool workers %%
-parpool(2); % is default, but is also how many configs you have
+parpool(3); % is default, but is also how many configs you have
 
 %% Add fieltrip and tools to the path %%
 addpath('tools');
@@ -47,7 +47,7 @@ end
 
 %% get subject list %%
 % subs = {'CP34-1', 'CP34-2'}
-subs = {'CP34-1'}
+subs = {'CP34-2'}
 
 %%% create frequency band configs %%%
 all_configs = {};
