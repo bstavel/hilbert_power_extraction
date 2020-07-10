@@ -34,22 +34,25 @@ for idxSubband = 1:nSubbands
 
     % save subband data
     dataSave(idxSubband, :, :, :) = cat(3, dataTMP.trial{:});
+    % clear dataTMP
+    clear dataTMP
 end
 
 %% clear data to deal with memory issues
-clear dataTMP
-data.trial{:} = 0;
+data = rmfield(data, {'sampleinfo', 'trial', 'cfg'});
+
 
 % normalize subbands before averaging
 for idxTrial = 1:nTrials
     % normalize subband
     data.trial{idxTrial} = squeeze(mean(robustScaler(squeeze(dataSave(:, :, :, idxTrial)), 3)));
+
 end
 
 %% clear data  and extract from structure to deal with memory issues
 clear dataSave
 dataHilb = cat(3, data.trial{:});
-data.trial{:} = 0;
+data = rmfield(data, {'trial'});
 
 % get electrode names %
 elec_table = cell2table(data.label);
