@@ -38,6 +38,7 @@ end
 
 %% clear data to deal with memory issues
 clear dataTMP
+data.trial{:} = 0;
 
 % normalize subbands before averaging
 for idxTrial = 1:nTrials
@@ -45,8 +46,10 @@ for idxTrial = 1:nTrials
     data.trial{idxTrial} = squeeze(mean(robustScaler(squeeze(dataSave(:, :, :, idxTrial)), 3)));
 end
 
-%% clear data to deal with memory issues
+%% clear data  and extract from structure to deal with memory issues
 clear dataSave
+dataHilb = cat(3, data.trial{:});
+data.trial{:} = 0;
 
 % get electrode names %
 elec_table = cell2table(data.label);
@@ -55,9 +58,6 @@ elec_index = 1:num_elecs ;
 elec_table.index = transpose(elec_index)
 
 %% concactenate into a tidy format and shrink to TOI %%
-
-% extraxt from structure %
-dataHilb = cat(3, data.trial{:});
 
 % get TOI %
 pre_trial_time = -.2 ;
