@@ -150,9 +150,6 @@ end
       case (5)
           freq_config = 'hfa_cfg';
     end
-    %% profiling for debugging mem issues
-    freq_config = 'hfa_cfg';
-    subject_config = 1;
 
     %% set config %%
     config = all_configs{subject_config}.(freq_config);
