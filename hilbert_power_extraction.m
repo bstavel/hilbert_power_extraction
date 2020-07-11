@@ -11,6 +11,7 @@ function extract_power_hilbert(config)
 
 %% load data %%
 load(config.filename);
+fprintf('subject is %s and freq is %s', config.sub, config.freq)
 
 %% set subband, trial, and time info %%
 nTrials = size(data.trialinfo, 1); % how many trials
@@ -58,7 +59,7 @@ data = rmfield(data, {'trial'});
 elec_table = cell2table(data.label);
 num_elecs = size(elec_table, 1) ;
 elec_index = 1:num_elecs ;
-elec_table.index = transpose(elec_index)
+elec_table.index = transpose(elec_index);
 
 %% concactenate into a tidy format and shrink to TOI %%
 
@@ -71,6 +72,12 @@ indices_of_interest = find(data.time{idxTrial} < post_trial_time & data.time{idx
 for idx = 1:nTrials
   % cut by trial and save in long data format %
   temp_hp = squeeze(dataHilb(:, indices_of_interest, idx));
+  'the size of size temp_hp is'
+  size(temp_hp)
+  'the size of size temp_hp, indices is'
+  size(temp_hp(:, (size(indices_of_interest, 2) + 1)))
+  'num eles is'
+  nElecs
   % sanity check to save elecs order %
    temp_hp(:, (size(indices_of_interest, 2) + 1)) = 1:nElecs ;
    temp_hp(:, (size(indices_of_interest, 2) + 2)) = data.trialinfo(idx, 1) ;
