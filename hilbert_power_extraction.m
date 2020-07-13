@@ -49,7 +49,7 @@ for idxTrial = 1:nTrials
     if nSubbands > 1
       data.trial{idxTrial} = squeeze(mean(robustScaler(squeeze(dataSave(:, :, :, idxTrial)), 3)));
     else
-      data.trial{idxTrial} = squeeze(robustScaler(squeeze(dataSave(:, :, :, idxTrial)), 3));
+      data.trial{idxTrial} = robustScaler(squeeze(dataSave(:, :, :, idxTrial)), 2);
     end
 end
 
@@ -77,14 +77,8 @@ for idx = 1:nTrials
   % initialize tmp %
   temp_hp = zeros(nElecs, nCols);
   % cut by trial and save in long data format %
-  temp_hp(:, (nCols -2 )) = squeeze(dataHilb(:, indices_of_interest, idx));
-  'the size of size temp_hp is'
-  size(temp_hp)
-  'the size of size temp_hp, indices is'
-  size(temp_hp(:, (nCols -1)))
-  'num eles is'
-  nElecs
-  % sanity check to save elecs order %
+  temp_hp(:, 1:(nCols -2 )) = squeeze(dataHilb(:, indices_of_interest, idx));
+  % add indexing columns %
    temp_hp(:, (nCols - 1)) = 1:nElecs ;
    temp_hp(:, nCols) = data.trialinfo(idx, 1) ;
    % concactenate across trials $
