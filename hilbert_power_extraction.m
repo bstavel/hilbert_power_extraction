@@ -46,8 +46,11 @@ data = rmfield(data, {'sampleinfo', 'trial', 'cfg'});
 % normalize subbands before averaging
 for idxTrial = 1:nTrials
     % normalize subband
-    data.trial{idxTrial} = squeeze(mean(robustScaler(squeeze(dataSave(:, :, :, idxTrial)), 3)));
-
+    if nSubbands > 1
+      data.trial{idxTrial} = squeeze(mean(robustScaler(squeeze(dataSave(:, :, :, idxTrial)), 3)));
+    else
+      data.trial{idxTrial} = squeeze(robustScaler(squeeze(dataSave(:, :, :, idxTrial)), 3));
+    end
 end
 
 %% clear data  and extract from structure to deal with memory issues
