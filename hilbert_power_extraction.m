@@ -81,7 +81,7 @@ for idx = 1:nTrials
   'the size of size temp_hp is'
   size(temp_hp)
   'the size of size temp_hp, indices is'
-  size(temp_hp(:, (nCols -1))
+  size(temp_hp(:, (nCols -1)))
   'num eles is'
   nElecs
   % sanity check to save elecs order %
