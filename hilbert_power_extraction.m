@@ -72,18 +72,21 @@ post_trial_time = 2 ;
 indices_of_interest = find(data.time{idxTrial} < post_trial_time & data.time{idxTrial} > pre_trial_time) ;
 
 % make tidy %
+nCols = size(indices_of_interest, 2) + 2 ;
 for idx = 1:nTrials
+  % initialize tmp %
+  temp_hp = zeros(nElecs, nCols);
   % cut by trial and save in long data format %
-  temp_hp = squeeze(dataHilb(:, indices_of_interest, idx));
+  temp_hp(:, (nCols -2 )) = squeeze(dataHilb(:, indices_of_interest, idx));
   'the size of size temp_hp is'
   size(temp_hp)
   'the size of size temp_hp, indices is'
-  size(temp_hp(:, (size(indices_of_interest, 2) + 1)))
+  size(temp_hp(:, (nCols -1))
   'num eles is'
   nElecs
   % sanity check to save elecs order %
-   temp_hp(:, (size(indices_of_interest, 2) + 1)) = 1:nElecs ;
-   temp_hp(:, (size(indices_of_interest, 2) + 2)) = data.trialinfo(idx, 1) ;
+   temp_hp(:, (nCols - 1)) = 1:nElecs ;
+   temp_hp(:, nCols) = data.trialinfo(idx, 1) ;
    % concactenate across trials $
    if idx == 1
      hp_prepped = temp_hp ;
