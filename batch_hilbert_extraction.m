@@ -36,7 +36,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% set par pool workers %%
-parpool(3); % is default, but is also how many configs you have
+% parpool(3); % is default, but is also how many configs you have
 
 %% Add fieltrip and tools to the path %%
 addpath('tools');
