@@ -62,8 +62,8 @@ end
 
 %% clear data  and extract from structure to deal with memory issues
 clear dataSave
-% dataHilb = cat(3, data.trial{:});
-% data = rmfield(data, {'trial'});
+dataHilb = cat(3, data.trial{:});
+data = rmfield(data, {'trial'});
 
 % get electrode names %
 elec_table = cell2table(data.label);
