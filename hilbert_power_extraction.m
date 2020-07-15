@@ -53,10 +53,17 @@ for idxTrial = 1:nTrials
     end
 end
 
+% % normalize subbands before averaging
+% if nSubbands > 1
+%   dataHilb = squeeze(mean(nanzscore(dataSave, 3), 1));
+% else
+%   dataHilb = nanzscore(squeeze(dataSave), 2);
+% end
+
 %% clear data  and extract from structure to deal with memory issues
 clear dataSave
-dataHilb = cat(3, data.trial{:});
-data = rmfield(data, {'trial'});
+% dataHilb = cat(3, data.trial{:});
+% data = rmfield(data, {'trial'});
 
 % get electrode names %
 elec_table = cell2table(data.label);
@@ -69,7 +76,7 @@ elec_table.index = transpose(elec_index);
 % get TOI %
 pre_trial_time = -.2 ;
 post_trial_time = 2 ;
-indices_of_interest = find(data.time{idxTrial} < post_trial_time & data.time{idxTrial} > pre_trial_time) ;
+indices_of_interest = find(data.time{1} < post_trial_time & data.time{1} > pre_trial_time) ;
 
 % make tidy %
 nCols = size(indices_of_interest, 2) + 2 ;
@@ -92,7 +99,7 @@ end
 
 
 % save data %
-csvwrite(sprintf('./extracted_data/%s_%s_munge_presentation_locked_new.csv', config.sub, config.freq), hp_prepped)
-writetable(elec_table, sprintf('./extracted_data/%s_electrodes_presentation_locked_new.csv', config.sub))
+csvwrite(sprintf('./extracted_data/%s_%s_munge_presentation_locked_zscore.csv', config.sub, config.freq), hp_prepped)
+writetable(elec_table, sprintf('./extracted_data/%s_electrodes_presentation_locked_zscore.csv', config.sub))
 
 return

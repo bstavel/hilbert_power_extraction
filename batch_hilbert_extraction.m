@@ -46,7 +46,7 @@ if ~exist('ft_defaults.m', 'file')
 end
 
 %% get subject list %%
-subs = {'CP34-1', 'CP34-2'}
+subs = {'IR19'}
 
 %%% create frequency band configs %%%
 all_configs = {};
@@ -130,7 +130,7 @@ end
 
 %% extract power via hilbert transforms %%
 
- for pIdx = 5:((length(subs)*6) - 1)
+ for pIdx = 0:((length(subs)*6) - 1)
      %% get subject and frequency indices %%
     subject_config = floor(pIdx/6) + 1; % there are 6 freq bands, so every 6 switch to new sub
     freqIdx = mod(pIdx, 6) ; % the remainder is the freq we are on
@@ -149,7 +149,6 @@ end
       case (5)
           freq_config = 'hfa_cfg';
     end
-
     %% set config %%
     config = all_configs{subject_config}.(freq_config);
 
