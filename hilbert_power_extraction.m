@@ -47,9 +47,9 @@ data = rmfield(data, {'sampleinfo', 'trial', 'cfg'});
 for idxTrial = 1:nTrials
     % normalize subband
     if nSubbands > 1
-      data.trial{idxTrial} = squeeze(mean(nanzscore(squeeze(dataSave(:, :, :, idxTrial)), 3)));
+      data.trial{idxTrial} = squeeze(mean(robustScaler(squeeze(dataSave(:, :, :, idxTrial)), 3)));
     else
-      data.trial{idxTrial} = nanzscore(squeeze(dataSave(:, :, :, idxTrial)), 2);
+      data.trial{idxTrial} = robustScaler(squeeze(dataSave(:, :, :, idxTrial)), 2);
     end
 end
 

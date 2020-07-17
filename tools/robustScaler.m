@@ -1,7 +1,7 @@
 function M_out = robustScaler(M_in, dim, quartiles)
 
     if nargin < 3
-        quartiles = [10 90];
+        quartiles = [25 75];
     end
     if nargin < 2 || isempty(dim)
         dim = 1;
