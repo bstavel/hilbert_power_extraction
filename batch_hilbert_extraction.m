@@ -36,7 +36,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% set par pool workers %%
-% parpool(3); % is default, but is also how many configs you have
+parpool(2); % is default, but is also how many configs you have
 
 %% Add fieltrip and tools to the path %%
 addpath('tools');
@@ -46,7 +46,7 @@ if ~exist('ft_defaults.m', 'file')
 end
 
 %% get subject list %%
-subs = {'IR19'}
+subs = {'IR19', 'IR57', 'IR35'}
 
 %%% create frequency band configs %%%
 all_configs = {};

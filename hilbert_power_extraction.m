@@ -53,13 +53,6 @@ for idxTrial = 1:nTrials
     end
 end
 
-% % normalize subbands before averaging
-% if nSubbands > 1
-%   dataHilb = squeeze(mean(nanzscore(dataSave, 3), 1));
-% else
-%   dataHilb = nanzscore(squeeze(dataSave), 2);
-% end
-
 %% clear data  and extract from structure to deal with memory issues
 clear dataSave
 dataHilb = cat(3, data.trial{:});
@@ -99,7 +92,7 @@ end
 
 
 % save data %
-csvwrite(sprintf('./extracted_data/%s_%s_munge_presentation_locked_zscore.csv', config.sub, config.freq), hp_prepped)
-writetable(elec_table, sprintf('./extracted_data/%s_electrodes_presentation_locked_zscore.csv', config.sub))
+csvwrite(sprintf('./extracted_data/%s_%s_munge_presentation_locked_rscaler_2575.csv', config.sub, config.freq), hp_prepped)
+writetable(elec_table, sprintf('./extracted_data/%s_electrodes_presentation_locked_rscaler_2575.csv', config.sub))
 
 return
