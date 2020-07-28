@@ -45,8 +45,16 @@ if ~exist('ft_defaults.m', 'file')
     ft_defaults;
 end
 
+%%% only parts to edit are right here! %%%
 %% get subject list %%
 subs = {'IR19', 'IR57', 'IR35'}
+choice = TRUE
+
+if choice == TRUE
+  sub_filename = sprintf('./data/%s_data_final_choice_padding.mat', sub);
+else
+  sub_filename = sprintf('./data/%s_data_final_padding.mat', sub);
+end
 
 %%% create frequency band configs %%%
 all_configs = {};
@@ -58,7 +66,7 @@ for subIdx = 1:length(subs)
 
   %% delta %%
   sub_config.delta_cfg = [];
-  sub_config.delta_cfg.filename = sprintf('./data/%s_data_final_padding.mat', sub);
+  sub_config.delta_cfg.filename = sub_filename;
   sub_config.delta_cfg.sub = sub;
   sub_config.delta_cfg.freq = 'delta';
   sub_config.delta_cfg.bpfilter = 'yes'; % do bandpass filter
@@ -69,7 +77,7 @@ for subIdx = 1:length(subs)
 
   %% theta %%
   theta_cfg = [];
-  sub_config.theta_cfg.filename = sprintf('./data/%s_data_final_padding.mat', sub);
+  sub_config.theta_cfg.filename = sub_filename;
   sub_config.theta_cfg.sub = sub;
   sub_config.theta_cfg.freq = 'theta';
   sub_config.theta_cfg.bpfilter = 'yes'; % do bandpass filter
@@ -80,7 +88,7 @@ for subIdx = 1:length(subs)
 
   %% alpha %%
   alpha_cfg = [];
-  sub_config.alpha_cfg.filename = sprintf('./data/%s_data_final_padding.mat', sub);
+  sub_config.alpha_cfg.filename = sub_filename;
   sub_config.alpha_cfg.sub = sub;
   sub_config.alpha_cfg.freq = 'alpha';
   sub_config.alpha_cfg.bpfilter = 'yes'; % do bandpass filter
@@ -91,7 +99,7 @@ for subIdx = 1:length(subs)
 
   %% beta %%
   beta_cfg = [];
-  sub_config.beta_cfg.filename = sprintf('./data/%s_data_final_padding.mat', sub);
+  sub_config.beta_cfg.filename = sub_filename;
   sub_config.beta_cfg.sub = sub;
   sub_config.beta_cfg.freq = 'beta';
   sub_config.beta_cfg.bpfilter = 'yes'; % do bandpass filter
@@ -102,7 +110,7 @@ for subIdx = 1:length(subs)
 
   %% gamma %%
   gamma_cfg = [];
-  sub_config.gamma_cfg.filename = sprintf('./data/%s_data_final_padding.mat', sub);
+  sub_config.gamma_cfg.filename = sub_filename;
   sub_config.gamma_cfg.sub = sub;
   sub_config.gamma_cfg.freq = 'gamma';
   sub_config.gamma_cfg.bpfilter = 'yes'; % do bandpass filter
@@ -113,7 +121,7 @@ for subIdx = 1:length(subs)
 
   %% hfa %%
   hfa_cfg = [];
-  sub_config.hfa_cfg.filename = sprintf('./data/%s_data_final_padding.mat', sub);
+  sub_config.hfa_cfg.filename = sub_filename;
   sub_config.hfa_cfg.sub = sub;
   sub_config.hfa_cfg.freq = 'hfa';
   sub_config.hfa_cfg.bpfilter = 'yes'; % do bandpass filter
