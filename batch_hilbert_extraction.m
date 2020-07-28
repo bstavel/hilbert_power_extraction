@@ -50,19 +50,19 @@ end
 subs = {'IR19', 'IR57', 'IR35'}
 choice = true
 
-if choice == true
-  epoch = 'choice';
-  sub_filename = sprintf('./data/%s_data_final_choice_padding.mat', sub);
-else
-  epoch = 'presentation';
-  sub_filename = sprintf('./data/%s_data_final_padding.mat', sub);
-end
-
 %%% create frequency band configs %%%
 all_configs = {};
 for subIdx = 1:length(subs)
   % get sub name %
   sub = subs{subIdx};
+  % get filename %
+  if choice == true
+    epoch = 'choice';
+    sub_filename = sprintf('./data/%s_data_final_choice_padding.mat', sub);
+  else
+    epoch = 'presentation';
+    sub_filename = sprintf('./data/%s_data_final_padding.mat', sub);
+  end
   % intialize subjects config %
   sub_config = [];
 
