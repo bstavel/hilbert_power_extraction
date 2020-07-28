@@ -92,7 +92,7 @@ end
 
 
 % save data %
-csvwrite(sprintf('./extracted_data/%s_%s_munge_presentation_locked_rscaler_2575.csv', config.sub, config.freq), hp_prepped)
-writetable(elec_table, sprintf('./extracted_data/%s_electrodes_presentation_locked_rscaler_2575.csv', config.sub))
+csvwrite(sprintf('./extracted_data/%s_%s_munge_%s_locked_rscaler_2575.csv', config.sub, config.freq, config.epoch), hp_prepped)
+writetable(elec_table, sprintf('./extracted_data/%s_electrodes_%s_locked_rscaler_2575.csv', config.sub, config.epoch))
 
 return
