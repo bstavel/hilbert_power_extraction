@@ -48,9 +48,9 @@ end
 %%% only parts to edit are right here! %%%
 %% get subject list %%
 subs = {'IR19', 'IR57', 'IR35'}
-choice = TRUE
+choice = true
 
-if choice == TRUE
+if choice == true
   epoch = 'choice';
   sub_filename = sprintf('./data/%s_data_final_choice_padding.mat', sub);
 else
