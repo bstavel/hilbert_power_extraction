@@ -67,8 +67,14 @@ elec_table.index = transpose(elec_index);
 %% concactenate into a tidy format and shrink to TOI %%
 
 % get TOI %
-pre_trial_time = -.2 ;
-post_trial_time = 2 ;
+if config.epoch == 'presentation'
+  pre_trial_time = -.2 ;
+  post_trial_time = 2 ;
+elseif config.epoch == 'choice'  
+  pre_trial_time = -.75 ;
+  post_trial_time = 1.5 ;
+end
+
 indices_of_interest = find(data.time{1} < post_trial_time & data.time{1} > pre_trial_time) ;
 
 % make tidy %
