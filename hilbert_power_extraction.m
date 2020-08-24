@@ -67,10 +67,10 @@ elec_table.index = transpose(elec_index);
 %% concactenate into a tidy format and shrink to TOI %%
 
 % get TOI %
-if config.epoch == 'presentation'
+if strcmp(config.epoch, 'presentation')
   pre_trial_time = -.2 ;
   post_trial_time = 2 ;
-elseif config.epoch == 'choice'  
+elseif strcmp(config.epoch, 'choice')
   pre_trial_time = -.75 ;
   post_trial_time = 1.5 ;
 end
