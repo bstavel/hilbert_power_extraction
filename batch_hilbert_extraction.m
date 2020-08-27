@@ -47,7 +47,7 @@ end
 
 %%% only parts to edit are right here! %%%
 %% get subject list %%
-subs = {'IR10', 'IR16', 'IR28', 'IR35', 'IR39'}
+subs = {'IR10', 'IR16', 'IR28', 'IR39'}
 choice = FALSE
 
 %%% create frequency band configs %%%
