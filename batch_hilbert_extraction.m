@@ -48,7 +48,7 @@ end
 %%% only parts to edit are right here! %%%
 %% get subject list %%
 subs = {'GP51'}
-choice = true 
+choice = true
 
 %%% create frequency band configs %%%
 all_configs = {};
@@ -146,8 +146,8 @@ end
 
 %% extract power via hilbert transforms %%
 
- parfor pIdx = 0:((length(subs)*6) - 1)
-     %% get subject and frequency indices %%
+ % parfor pIdx = 0:((length(subs)*6) - 1)
+ %     %% get subject and frequency indices %%
     subject_config = floor(pIdx/6) + 1; % there are 6 freq bands, so every 6 switch to new sub
 %    freqIdx = mod(pIdx, 6) ; % the remainder is the freq we are on
     % use freq index to frequency config name %
@@ -163,12 +163,12 @@ end
 %      case (4)
 %          freq_config = 'gamma_cfg';
 %      case (5)
-          freq_config = 'hfa_cfg';
+%          freq_config = 'hfa_cfg';
 %
 %    end
     %% set config %%
-    config = all_configs{subject_config}.(freq_config);
+    config = all_configs{1}.('hfa_cfg');
 
     %% extract it! %%
     hilbert_power_extraction(config);
- end
+ % end
