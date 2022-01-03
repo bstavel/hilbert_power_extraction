@@ -47,7 +47,7 @@ end
 
 %%% only parts to edit are right here! %%%
 %% get subject list %%
-subs = {'DA9', 'CP38'}
+subs = {'DA9', 'ST40'}
 choice = true
 
 %%% create frequency band configs %%%
@@ -146,27 +146,27 @@ end
 
 %% extract power via hilbert transforms %%
 
- % parfor pIdx = 0:((length(subs)*6) - 1) % all bands
- parfor pIdx = 1:length(subs)
-%     %% get subject and frequency indices %%
-    % subject_config = floor(pIdx/6) + 1; % there are 6 freq bands, so every 6 switch to new sub
-%    freqIdx = mod(pIdx, 6) ; % the remainder is the freq we are on
+  parfor pIdx = 0:((length(subs)*6) - 1) % all bands
+%  parfor pIdx = 1:length(subs)
+    %% get subject and frequency indices %%
+    subject_config = floor(pIdx/6) + 1; % there are 6 freq bands, so every 6 switch to new sub
+   freqIdx = mod(pIdx, 6) ; % the remainder is the freq we are on
     % use freq index to frequency config name %
-%    switch freqIdx
-%      case (0)
-%          freq_config = 'delta_cfg';
-%      case (1)
-%          freq_config = 'theta_cfg';
-%      case (2)
-%          freq_config = 'alpha_cfg';
-%      case (3)
-%          freq_config = 'beta_cfg';
-%      case (4)
-%          freq_config = 'gamma_cfg';
-%      case (5)
-%          freq_config = 'hfa_cfg';
-%
-%    end
+   switch freqIdx
+     case (0)
+         freq_config = 'delta_cfg';
+     case (1)
+         freq_config = 'theta_cfg';
+     case (2)
+         freq_config = 'alpha_cfg';
+     case (3)
+         freq_config = 'beta_cfg';
+     case (4)
+         freq_config = 'gamma_cfg';
+     case (5)
+         freq_config = 'hfa_cfg';
+
+   end
     %% set config %%
     config = all_configs{pIdx}.('hfa_cfg');
 
