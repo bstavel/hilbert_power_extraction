@@ -168,7 +168,7 @@ end
 
    end
     %% set config %%
-    config = all_configs{pIdx}.('hfa_cfg');
+    config =  all_configs{subject_config}.(freq_config);
 
     %% extract it! %%
     hilbert_power_extraction(config);
