@@ -20,8 +20,6 @@ extracts power from preprocessed iEEG electrode time series data across the freq
   - order of the filter, experessed as a decibal / octave . Some higher orders do not work. 
   - having steeper cut off frequencies results iin more distortion
   - see code at the bottom
-* How do you handle trials with bad data? Currently have the flags, but that seems like a hack?
-  - is specific to this patient
 * Why do you use robustScaler?
   - less susepctible to outliers
 * Can I shrink the data down to our TOI before using robustScaler?
